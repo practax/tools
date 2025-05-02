@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practax PreCheck - Smart Tax Compliance Verification Tool</title>
+    <meta name="description" content="Verify your tax returns before filing. AI-powered checks for Form 16, 26AS, AIS mismatches, deductions validation and compliance alerts.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --secondary: #4cc9f0;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4bb543;
+            --warning: #ffcc00;
+            --danger: #ff3333;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        .hero-section {
+            padding: 6rem 0 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-img {
+            animation: float 6s ease-in-out infinite;
+            max-width: 100%;
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.2));
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-size: 1.75rem;
+        }
+        
+        .tool-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .tool-img {
+            height: 180px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            padding: 0.75rem 1.75rem;
+            font-weight: 500;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+        }
+        
+        .stats-item {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stats-item .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .cta-section {
+            background: linear-gradient(rgba(67, 97, 238, 0.9), rgba(67, 97, 238, 0.9)), url('images/cta-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        
+        .how-it-works-step {
+            position: relative;
+            padding-left: 80px;
+            margin-bottom: 2rem;
+        }
+        
+        .how-it-works-step .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .partner-logo {
+            height: 50px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .partner-logo:hover {
+            filter: grayscale(0);
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 4rem 0 2rem;
+                text-align: center;
+            }
+            
+            .hero-img {
+                margin-top: 2rem;
+                max-width: 80%;
+            }
+            
+            .how-it-works-step {
+                padding-left: 0;
+                padding-top: 80px;
+                text-align: center;
+            }
+            
+            .how-it-works-step .step-number {
+                left: 50%;
+                top: 0;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" alt="Practax PreCheck Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tools">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown">
+                            Resources
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Tax Guides</a></li>
+                            <li><a class="dropdown-item" href="#">Video Tutorials</a></li>
+                            <li><a class="dropdown-item" href="#">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary" href="#demo">Request Demo</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section hero-gradient">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInDown">Smart Tax Compliance Verification</h1>
+                    <p class="lead mb-4 animate__animated animate__fadeIn animate__delay-1s">AI-powered tool to check your tax returns for errors before filing. Verify Form 16, 26AS, AIS mismatches and avoid notices.</p>
+                    <div class="d-flex flex-wrap gap-3 animate__animated animate__fadeIn animate__delay-2s">
+                        <a href="#demo" class="btn btn-light btn-lg px-4">
+                            <i class="fas fa-play-circle me-2"></i> Watch Demo
+                        </a>
+                        <a href="#tools" class="btn btn-outline-light btn-lg px-4">
+                            <i class="fas fa-tools me-2"></i> Explore Tools
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center mt-4 animate__animated animate__fadeIn animate__delay-3s">
+                        <div class="d-flex">
+                            <img src="images/user-1.jpg" class="rounded-circle border border-3 border-white" width="40" height="40" style="object-fit: cover;">
+                            <img src="images/user-2.jpg" class="rounded-circle border border-3 border-white ms-n2" width="40" height="40" style="object-fit: cover;">
+                            <img src="images/user-3.jpg" class="rounded-circle border border-3 border-white ms-n2" width="40" height="40" style="object-fit: cover;">
+                        </div>
+                        <div class="ms-3 text-white-50">
+                            <span class="d-block">Trusted by 12,500+ tax filers</span>
+                            <div class="small">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <span class="ms-1">4.9/5 (1,284 reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate__animated animate__fadeInRight animate__delay-1s">
+                    <img src="images/hero-dashboard.png" alt="Practax PreCheck Dashboard" class="hero-img img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-4" style="margin-top: -50px; z-index: 2; position: relative;">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="stats-item">
+                        <div class="number">12,500+</div>
+                        <div class="text-white-50">Tax Filers</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-item">
+                        <div class="number">98%</div>
+                        <div class="text-white-50">Accuracy Rate</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-item">
+                        <div class="number">50+</div>
+                        <div class="text-white-50">Compliance Checks</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stats-item">
+                        <div class="number">24/7</div>
+                        <div class="text-white-50">Support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <span class="text-primary fw-bold">WHY CHOOSE US</span>
+                <h2 class="section-title mt-2">Powerful Features</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <h4>Document Verification</h4>
+                        <p class="text-muted">Automatically cross-check Form 16, 26AS, AIS and investment proofs for discrepancies.</p>
+                        <ul class="text-muted">
+                            <li>PDF/Excel upload support</li>
+                            <li>Data extraction from scanned files</li>
+                            <li>Side-by-side comparison</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h4>AI-Powered Analysis</h4>
+                        <p class="text-muted">Our machine learning models identify potential red flags and audit triggers.</p>
+                        <ul class="text-muted">
+                            <li>Income mismatch detection</li>
+                            <li>Deduction eligibility checks</li>
+                            <li>Presumptive taxation analysis</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h4>Comprehensive Reports</h4>
+                        <p class="text-muted">Get detailed PDF reports with confidence scores and actionable recommendations.</p>
+                        <ul class="text-muted">
+                            <li>Issue severity classification</li>
+                            <li>Step-by-step fixes</li>
+                            <li>Downloadable certificate</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <span class="text-primary fw-bold">OUR TOOLS</span>
+                <h2 class="section-title mt-2">Tax Verification Tools</h2>
+                <p class="text-muted mx-auto" style="max-width: 700px;">Specialized tools for different tax verification needs</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="tool-card">
+                        <img src="images/tool-1.jpg" alt="Form 16 Verifier" class="tool-img">
+                        <div class="p-4">
+                            <h4>Form 16 Verifier</h4>
+                            <p class="text-muted">Validate your Form 16 against 26AS and detect TDS mismatches.</p>
+                            <a href="#" class="btn btn-outline-primary">Try Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="tool-card">
+                        <img src="images/tool-2.jpg" alt="AIS Analyzer" class="tool-img">
+                        <div class="p-4">
+                            <h4>AIS Analyzer</h4>
+                            <p class="text-muted">Comprehensive analysis of your Annual Information Statement.</p>
+                            <a href="#" class="btn btn-outline-primary">Try Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="tool-card">
+                        <img src="images/tool-3.jpg" alt="Deduction Validator" class="tool-img">
+                        <div class="p-4">
+                            <h4>Deduction Validator</h4>
+                            <p class="text-muted">Verify all chapter VI-A deductions with supporting documents.</p>
+                            <a href="#" class="btn btn-outline-primary">Try Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="tool-card">
+                        <img src="images/tool-4.jpg" alt="Capital Gains Calculator" class="tool-img">
+                        <div class="p-4">
+                            <h4>Capital Gains Calculator</h4>
+                            <p class="text-muted">Accurate capital gains computation with brokerage integration.</p>
+                            <a href="#" class="btn btn-outline-primary">Try Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="tool-card">
+                        <img src="images/tool-5.jpg" alt="HRA Exemption Tool" class="tool-img">
+                        <div class="p-4">
+                            <h4>HRA Exemption Tool</h4>
+                            <p class="text-muted">Calculate and validate House Rent Allowance claims.</p>
+                            <a href="#" class="btn btn-outline-primary">Try Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="tool-card">
+                        <img src="images/tool-6.jpg" alt="Business Tax Checker" class="tool-img">
+                        <div class="p-4">
+                            <h4>Business Tax Checker</h4>
+                            <p class="text-muted">Specialized tool for business owners and professionals.</p>
+                            <a href="#" class="btn btn-outline-primary">Try Tool</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-primary px-5">View All Tools</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <img src="images/how-it-works.png" alt="How Practax PreCheck Works" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6">
+                    <span class="text-primary fw-bold">PROCESS</span>
+                    <h2 class="section-title mt-2">How It Works</h2>
+                    <p class="text-muted mb-5">Get your tax compliance verified in just 3 simple steps</p>
+                    
+                    <div class="how-it-works-step">
+                        <div class="step-number">1</div>
+                        <h4>Upload Documents</h4>
+                        <p class="text-muted">Upload your Form 16, 26AS, AIS, investment proofs and other tax documents in PDF or Excel format.</p>
+                    </div>
+                    
+                    <div class="how-it-works-step">
+                        <div class="step-number">2</div>
+                        <h4>AI Analysis</h4>
+                        <p class="text-muted">Our system automatically checks for mismatches, missing documents, and potential red flags.</p>
+                    </div>
+                    
+                    <div class="how-it-works-step">
+                        <div class="step-number">3</div>
+                        <h4>Get Your Report</h4>
+                        <p class="text-muted">Receive a detailed PDF report with confidence score and actionable recommendations.</p>
+                    </div>
+                    
+                    <a href="#" class="btn btn-primary mt-3">Start Free Check</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <span class="text-primary fw-bold">TESTIMONIALS</span>
+                <h2 class="section-title mt-2">What Our Users Say</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="testimonial-card h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="images/testimonial-1.jpg" alt="User" class="testimonial-img me-3">
+                            <div>
+                                <h5 class="mb-0">Rajesh Kumar</h5>
+                                <span class="text-muted small">Chartered Accountant</span>
+                            </div>
+                        </div>
+                        <div class="mb-3 text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-muted">"Practax PreCheck has reduced our tax filing errors by 90%. The document verification tools are incredibly accurate and save us hours of manual work."</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="images/testimonial-2.jpg" alt="User" class="testimonial-img me-3">
+                            <div>
+                                <h5 class="mb-0">Priya Sharma</h5>
+                                <span class="text-muted small">Salaried Professional</span>
+                            </div>
+                        </div>
+                        <div class="mb-3 text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-muted">"I was able to identify ₹25,000 mismatch in my TDS before filing. The tool is so easy to use and the report helped me correct my return."</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="images/testimonial-3.jpg" alt="User" class="testimonial-img me-3">
+                            <div>
+                                <h5 class="mb-0">Amit Patel</h5>
+                                <span class="text-muted small">Small Business Owner</span>
+                            </div>
+                        </div>
+                        <div class="mb-3 text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-muted">"The business tax checker helped me optimize my deductions under 44AD. I saved ₹68,000 in taxes this year thanks to Practax!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="py-5 bg-light">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <span class="text-primary fw-bold">TRUSTED BY</span>
+                <h2 class="section-title mt-2">Our Partners</h2>
+            </div>
+            <div class="row align-items-center justify-content-center g-4">
+                <div class="col-6 col-md-3 col-lg-2">
+                    <img src="images/partner-1.png" alt="Partner" class="img-fluid partner-logo">
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <img src="images/partner-2.png" alt="Partner" class="img-fluid partner-logo">
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <img src="images/partner-3.png" alt="Partner" class="img-fluid partner-logo">
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <img src="images/partner-4.png" alt="Partner" class="img-fluid partner-logo">
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <img src="images/partner-5.png" alt="Partner" class="img-fluid partner-logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="demo" class="cta-section py-5 text-white">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="display-5 fw-bold mb-4">Ready to Simplify Your Tax Filing?</h2>
+                    <p class="lead mb-5">Join 12,500+ individuals and professionals who verify their tax returns with Practax PreCheck</p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="#" class="btn btn-light btn-lg px-4">
+                            <i class="fas fa-play-circle me-2"></i> Watch Demo
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-lg px-4">
+                            <i class="fas fa-calendar-check me-2"></i> Book Free Consultation
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container py-4">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <img src="images/logo-white.png" alt="Practax PreCheck" width="180" class="mb-3">
+                    <p class="text-white-50">AI-powered tax compliance verification tool for individuals and professionals.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="mb-4">Quick Links</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-2"><a href="#" class="text-white-50">Home</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Features</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Tools</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Pricing</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="mb-4">Resources</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-2"><a href="#" class="text-white-50">Blog</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Help Center</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Tax Guides</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Webinars</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">API Docs</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="mb-4">Newsletter</h5>
+                    <p class="text-white-50">Subscribe to get tax tips and updates</p>
+                    <form class="mb-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                    <p class="small text-white-50">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small text-white-50 mb-0">© 2025 Practax. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small text-white-50 mb-0">
+                        <a href="#" class="text-white-50 me-3">Privacy Policy</a>
+                        <a href="#" class="text-white-50 me-3">Terms of Service</a>
+                        <a href="#" class="text-white-50">GDPR</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animate elements when they come into view
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.feature-card, .tool-card, .testimonial-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if(elementPosition < screenPosition) {
+                    element.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
