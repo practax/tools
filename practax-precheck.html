@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online tax compliance checker for individuals and professionals. Verify your income tax return before filing with Practax PreCheck.">
+    <meta name="keywords" content="income tax, tax filing, Form 16, Form 26AS, AIS, tax calculator, tax compliance">
+    <title>Practax PreCheck - Verify Your Tax Return Before Filing</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta property="og:title" content="Practax PreCheck - Tax Compliance Checker">
+    <meta property="og:description" content="Verify your tax return for errors before filing. Free online tool for individuals and professionals.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://practax.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4bb543;
+            --warning-color: #ffcc00;
+            --danger-color: #ff3333;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            color: white;
+            padding: 4rem 0;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: white;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+        
+        .form-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-tabs .nav-link {
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+        
+        .form-tabs .nav-link.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .report-card {
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .issue-item {
+            padding: 0.75rem;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .critical {
+            background-color: rgba(255, 51, 51, 0.1);
+            border-left: 4px solid var(--danger-color);
+        }
+        
+        .warning {
+            background-color: rgba(255, 204, 0, 0.1);
+            border-left: 4px solid var(--warning-color);
+        }
+        
+        .success {
+            background-color: rgba(75, 181, 67, 0.1);
+            border-left: 4px solid var(--success-color);
+        }
+        
+        .confidence-meter {
+            height: 20px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--danger-color) 0%, var(--warning-color) 50%, var(--success-color) 100%);
+        }
+        
+        .confidence-value {
+            width: 75%; /* Dynamic value from JS */
+            height: 100%;
+            border-radius: 10px;
+            background-color: white;
+            position: relative;
+        }
+        
+        .confidence-value::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -5px;
+            width: 2px;
+            height: 30px;
+            background-color: var(--dark-color);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .ad-container {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 2rem 0;
+            }
+            
+            .upload-area {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-file-invoice-dollar me-2"></i>
+                Practax PreCheck
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#check-now">Check Now</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary ms-lg-3" href="#login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section mb-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">Verify Your Tax Return Before Filing</h1>
+                    <p class="lead mb-4">Practax PreCheck helps individuals and professionals identify errors in their income tax returns before submission. Avoid notices and penalties with our free compliance checker.</p>
+                    <a href="#check-now" class="btn btn-light btn-lg me-2">Check Now</a>
+                    <a href="#how-it-works" class="btn btn-outline-light btn-lg">How It Works</a>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <img src="https://via.placeholder.com/600x400?text=Tax+Compliance+Illustration" alt="Tax Compliance Check" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Banner -->
+    <div class="container mb-5">
+        <div class="ad-container">
+            <!-- Google AdSense Ad Unit -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=8863848275665250"></script>
+            <!-- Practax_Top_Banner -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="8863848275665250"
+                 data-ad-slot="ca-app-pub-8863848275665250/2422876520"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Key Features</h2>
+                <p class="text-muted">Everything you need to ensure tax compliance</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-upload"></i>
+                        </div>
+                        <h4>Document Upload</h4>
+                        <p>Upload Form 16, 26AS, AIS, and other tax documents in PDF, Excel, or JSON format for automated verification.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-search-dollar"></i>
+                        </div>
+                        <h4>Compliance Checks</h4>
+                        <p>Detect mismatches between your reported income and official records, missing documents, and potential red flags.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h4>Detailed Report</h4>
+                        <p>Get a comprehensive PDF report with confidence score and actionable recommendations to fix issues.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">How Practax PreCheck Works</h2>
+                <p class="text-muted">Simple steps to verify your tax return</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center p-3">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                            <span class="fs-4">1</span>
+                        </div>
+                        <h4 class="mt-3">Upload Documents</h4>
+                        <p>Upload your tax documents or enter details manually</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center p-3">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                            <span class="fs-4">2</span>
+                        </div>
+                        <h4 class="mt-3">AI Analysis</h4>
+                        <p>Our system checks for discrepancies and compliance issues</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center p-3">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                            <span class="fs-4">3</span>
+                        </div>
+                        <h4 class="mt-3">Get Report</h4>
+                        <p>Receive a detailed report with confidence score</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center p-3">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                            <span class="fs-4">4</span>
+                        </div>
+                        <h4 class="mt-3">Fix & File</h4>
+                        <p>Address issues before final submission to IT Department</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Banner -->
+    <div class="container my-5">
+        <div class="ad-container">
+            <!-- Google AdSense Ad Unit -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=8863848275665250"></script>
+            <!-- Practax_Mid_Banner -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="8863848275665250"
+                 data-ad-slot="ca-app-pub-8863848275665250/2422876520"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <!-- Check Now Section -->
+    <section id="check-now" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="fw-bold mb-4">Start Your Tax PreCheck</h2>
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt fa-3x mb-3 text-primary"></i>
+                        <h4>Upload Tax Documents</h4>
+                        <p class="text-muted">Drag & drop your Form 16, 26AS, AIS or other documents here</p>
+                        <p class="small text-muted">Supports PDF, Excel, JSON (Max 10MB)</p>
+                        <input type="file" id="fileInput" accept=".pdf,.xlsx,.xls,.json" multiple style="display: none;">
+                        <button class="btn btn-primary mt-2" onclick="document.getElementById('fileInput').click()">Select Files</button>
+                    </div>
+                    <div class="text-center my-3">
+                        <p class="text-muted">- OR -</p>
+                    </div>
+                    <button id="manualEntryBtn" class="btn btn-outline-primary w-100">Enter Details Manually</button>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-section" id="manualForm" style="display: none;">
+                        <ul class="nav nav-tabs form-tabs mb-4" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button">Basic Info</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="income-tab" data-bs-toggle="tab" data-bs-target="#income" type="button">Income</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="deductions-tab" data-bs-toggle="tab" data-bs-target="#deductions" type="button">Deductions</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="taxes-tab" data-bs-toggle="tab" data-bs-target="#taxes" type="button">Taxes Paid</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="basic" role="tabpanel">
+                                <div class="mb-3">
+                                    <label for="pan" class="form-label">PAN Number</label>
+                                    <input type="text" class="form-control" id="pan" placeholder="ABCDE1234F" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fy" class="form-label">Financial Year</label>
+                                    <select class="form-select" id="fy">
+                                        <option value="2023-24">2023-24</option>
+                                        <option value="2022-23">2022-23</option>
+                                        <option value="2021-22">2021-22</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="residentialStatus" class="form-label">Residential Status</label>
+                                    <select class="form-select" id="residentialStatus">
+                                        <option value="resident">Resident</option>
+                                        <option value="nri">NRI</option>
+                                        <option value="rnor">RNOR</option>
+                                    </select>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-primary next-tab" data-next="income">Next <i class="fas fa-arrow-right ms-2"></i></button>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="income" role="tabpanel">
+                                <h5 class="mb-3">Income Sources</h5>
+                                <div class="mb-3">
+                                    <label for="salary" class="form-label">Salary Income</label>
+                                    <input type="number" class="form-control" id="salary" placeholder="0">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="business" class="form-label">Business Income</label>
+                                    <input type="number" class="form-control" id="business" placeholder="0">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="capitalGains" class="form-label">Capital Gains</label>
+                                    <input type="number" class="form-control" id="capitalGains" placeholder="0">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="otherIncome" class="form-label">Other Income</label>
+                                    <input type="number" class="form-control" id="otherIncome" placeholder="0">
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <button class="btn btn-outline-secondary prev-tab" data-prev="basic"><i class="fas fa-arrow-left me-2"></i> Back</button>
+                                    <button class="btn btn-primary next-tab" data-next="deductions">Next <i class="fas fa-arrow-right ms-2"></i></button>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="deductions" role="tabpanel">
+                                <h5 class="mb-3">Deductions</h5>
+                                <div class="mb-3">
+                                    <label for="section80C" class="form-label">Section 80C (Max ₹1.5L)</label>
+                                    <input type="number" class="form-control" id="section80C" placeholder="0">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="section80D" class="form-label">Section 80D (Health Insurance)</label>
+                                    <input type="number" class="form-control" id="section80D" placeholder="0">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="hra" class="form-label">HRA Exemption</label>
+                                    <input type="number" class="form-control" id="hra" placeholder="0">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="otherDeductions" class="form-label">Other Deductions</label>
+                                    <input type="number" class="form-control" id="otherDeductions" placeholder="0">
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <button class="btn btn-outline-secondary prev-tab" data-prev="income"><i class="fas fa-arrow-left me-2"></i> Back</button>
+                                    <button class="btn btn-primary next-tab" data-next="taxes">Next <i class="fas fa-arrow-right ms-2"></i></button>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="taxes" role="tabpanel">
+                                <h5 class="mb-3">Taxes Paid</h5>
+                                <div class="mb-3">
+                                    <label for="tds" class="form-label">TDS Deducted</label>
+                                    <input type="number" class="form-control" id="tds" placeholder="0">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="advanceTax" class="form-label">Advance Tax Paid</label>
+                                    <input type="number" class="form-control" id="advanceTax" placeholder="0">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="selfAssessmentTax" class="form-label">Self Assessment Tax Paid</label>
+                                    <input type="number" class="form-control" id="selfAssessmentTax" placeholder="0">
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <button class="btn btn-outline-secondary prev-tab" data-prev="deductions"><i class="fas fa-arrow-left me-2"></i> Back</button>
+                                    <button class="btn btn-success" id="submitForm">Submit for Analysis</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Report Section (Initially Hidden) -->
+    <section id="reportSection" class="py-5 bg-light" style="display: none;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="report-card bg-white p-4 rounded shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h2 class="fw-bold mb-0">PreCheck Report</h2>
+                            <span class="badge bg-primary">Generated: <span id="reportDate"></span></span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <h5 class="mb-0">Confidence Score</h5>
+                                <strong id="confidenceScore">75%</strong>
+                            </div>
+                            <div class="confidence-meter mb-2">
+                                <div class="confidence-value"></div>
+                            </div>
+                            <p class="text-muted small">This score indicates how ready your return is for filing based on our checks</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Summary</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Total Income</th>
+                                        <td id="reportTotalIncome">₹8,75,000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total Deductions</th>
+                                        <td id="reportTotalDeductions">₹1,85,000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Taxable Income</th>
+                                        <td id="reportTaxableIncome">₹6,90,000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total Tax Paid</th>
+                                        <td id="reportTaxPaid">₹72,500</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Issues Detected</h5>
+                            <div id="issuesList">
+                                <div class="issue-item critical mb-2">
+                                    <div class="d-flex justify-content-between">
+                                        <strong>Income Mismatch</strong>
+                                        <span class="badge bg-danger">Critical</span>
+                                    </div>
+                                    <p class="mb-0">Salary income (₹8,75,000) doesn't match Form 26AS (₹9,25,000). Difference: ₹50,000</p>
+                                </div>
+                                <div class="issue-item warning mb-2">
+                                    <div class="d-flex justify-content-between">
+                                        <strong>Missing Document</strong>
+                                        <span class="badge bg-warning text-dark">Warning</span>
+                                    </div>
+                                    <p class="mb-0">No proof uploaded for 80D deduction of ₹25,000</p>
+                                </div>
+                                <div class="issue-item success mb-2">
+                                    <div class="d-flex justify-content-between">
+                                        <strong>TDS Verified</strong>
+                                        <span class="badge bg-success">OK</span>
+                                    </div>
+                                    <p class="mb-0">TDS matches with Form 26AS records</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Recommendations</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">1. Reconcile salary income with Form 16/26AS</li>
+                                <li class="list-group-item">2. Upload health insurance premium receipt for 80D claim</li>
+                                <li class="list-group-item">3. Verify capital gains with brokerage statements</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mt-4">
+                            <button class="btn btn-outline-secondary" id="backToForm">
+                                <i class="fas fa-edit me-2"></i> Edit Information
+                            </button>
+                            <button class="btn btn-primary" id="downloadReport">
+                                <i class="fas fa-download me-2"></i> Download PDF Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Banner -->
+    <div class="container my-5">
+        <div class="ad-container">
+            <!-- Google AdSense Ad Unit -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=8863848275665250"></script>
+            <!-- Practax_Bottom_Banner -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="8863848275665250"
+                 data-ad-slot="ca-app-pub-8863848275665250/2422876520"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Frequently Asked Questions</h2>
+                <p class="text-muted">Common questions about Practax PreCheck</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Is Practax PreCheck free to use?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, our basic tax compliance check is completely free. We may offer premium features in the future for advanced analysis.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    How secure is my tax data?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We take data security very seriously. All documents are encrypted, and we automatically delete your files after 24 hours. We don't store your PAN or sensitive financial details permanently.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    What documents do I need for the check?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    For best results, upload your Form 16 (if salaried), Form 26AS/AIS, investment proofs (for deductions), and capital gains statements. You can also enter details manually if you don't have documents ready.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Can I use this for business tax filing?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Currently, we focus on individual tax filers and professionals. Business tax features with GST integration are coming soon.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-4">Ready to Check Your Tax Return?</h2>
+            <p class="lead mb-4">Avoid notices and penalties by verifying your return before filing</p>
+            <a href="#check-now" class="btn btn-light btn-lg px-5">Start Free Check</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-4">
+                        <i class="fas fa-file-invoice-dollar me-2"></i>
+                        Practax PreCheck
+                    </h5>
+                    <p>Free online tool to verify your income tax return before filing. Identify errors, mismatches, and compliance issues.</p>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#features" class="text-white-50">Features</a></li>
+                        <li class="mb-2"><a href="#how-it-works" class="text-white-50">How It Works</a></li>
+                        <li class="mb-2"><a href="#faq" class="text-white-50">FAQ</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">Contact</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> practaxbs@gmail.com</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +91 94056 60036</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="text-white mb-4">Follow Us</h5>
+                    <div class="d-flex">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-secondary">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small text-white-50 mb-0">© 2025 Practax. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small text-white-50 mb-0">Designed with <i class="fas fa-heart text-danger"></i> in India</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Manual Entry Button
+            document.getElementById('manualEntryBtn').addEventListener('click', function() {
+                document.getElementById('uploadArea').style.display = 'none';
+                document.getElementById('manualForm').style.display = 'block';
+                this.style.display = 'none';
+            });
+            
+            // Tab Navigation
+            document.querySelectorAll('.next-tab').forEach(button => {
+                button.addEventListener('click', function() {
+                    const nextTab = this.getAttribute('data-next');
+                    const nextTabEl = document.getElementById(nextTab + '-tab');
+                    const tab = new bootstrap.Tab(nextTabEl);
+                    tab.show();
+                });
+            });
+            
+            document.querySelectorAll('.prev-tab').forEach(button => {
+                button.addEventListener('click', function() {
+                    const prevTab = this.getAttribute('data-prev');
+                    const prevTabEl = document.getElementById(prevTab + '-tab');
+                    const tab = new bootstrap.Tab(prevTabEl);
+                    tab.show();
+                });
+            });
+            
+            // Form Submission
+            document.getElementById('submitForm').addEventListener('click', function() {
+                // Validate PAN
+                const pan = document.getElementById('pan').value;
+                const panRegex = /[A-Z]{5}[0-9]{4}[A-Z]{1}/;
+                
+                if (!panRegex.test(pan)) {
+                    alert('Please enter a valid PAN number');
+                    return;
+                }
+                
+                // Show report section
+                document.getElementById('check-now').scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('reportSection').style.display = 'block';
+                
+                // Set report date
+                const now = new Date();
+                document.getElementById('reportDate').textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+                
+                // Calculate confidence score (simplified example)
+                const issues = document.querySelectorAll('#issuesList .issue-item').length;
+                const score = Math.max(10, 100 - (issues * 15));
+                document.getElementById('confidenceScore').textContent = score + '%';
+                document.querySelector('.confidence-value').style.width = score + '%';
+            });
+            
+            // Back to form button
+            document.getElementById('backToForm').addEventListener('click', function() {
+                document.getElementById('reportSection').style.display = 'none';
+                document.getElementById('manualEntryBtn').style.display = 'block';
+                document.getElementById('uploadArea').style.display = 'block';
+                document.getElementById('manualForm').style.display = 'none';
+            });
+            
+            // Download report
+            document.getElementById('downloadReport').addEventListener('click', function() {
+                alert('PDF report generation would be implemented with a library like pdfkit or jsPDF in a real application');
+                // In a real app, this would generate a PDF using the collected data
+            });
+            
+            // File upload handling
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('fileInput');
+            
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = '#4361ee';
+                uploadArea.style.backgroundColor = 'rgba(67, 97, 238, 0.05)';
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.borderColor = '#ccc';
+                uploadArea.style.backgroundColor = 'white';
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.style.borderColor = '#ccc';
+                uploadArea.style.backgroundColor = 'white';
+                
+                const files = e.dataTransfer.files;
+                handleFiles(files);
+            });
+            
+            fileInput.addEventListener('change', () => {
+                handleFiles(fileInput.files);
+            });
+            
+            function handleFiles(files) {
+                if (files.length > 0) {
+                    // In a real app, this would upload files to server for processing
+                    alert(files.length + ' file(s) selected. In a real application, these would be uploaded and processed.');
+                    
+                    // Simulate processing
+                    setTimeout(() => {
+                        document.getElementById('check-now').scrollIntoView({ behavior: 'smooth' });
+                        document.getElementById('reportSection').style.display = 'block';
+                        
+                        const now = new Date();
+                        document.getElementById('reportDate').textContent = now.toLocaleDateString() + ' ' + now.toLocaleTimeString();
+                        
+                        // Sample data for demo
+                        document.getElementById('reportTotalIncome').textContent = '₹9,25,000';
+                        document.getElementById('reportTotalDeductions').textContent = '₹1,85,000';
+                        document.getElementById('reportTaxableIncome').textContent = '₹7,40,000';
+                        document.getElementById('reportTaxPaid').textContent = '₹72,500';
+                        
+                        // Set confidence score
+                        document.getElementById('confidenceScore').textContent = '85%';
+                        document.querySelector('.confidence-value').style.width = '85%';
+                    }, 1500);
+                }
+            }
+        });
+    </script>
+    
+    <!-- SEO: Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Practax PreCheck",
+      "url": "https://practaxprecheck.com",
+      "description": "Free online tool to verify your income tax return before filing. Check for errors, mismatches and compliance issues.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      }
+    }
+    </script>
+</body>
+</html>
